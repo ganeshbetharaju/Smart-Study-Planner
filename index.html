@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Study Planner</title>
+  <meta name="description" content="Smart Study Planner - frontend only project using Local Storage" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Smart Study Planner</h1>
+        <div class="sub">Plan, track and complete study tasks — local-only</div>
+      </div>
+      <div class="flex">
+        <div class="small">Saved locally · Works offline</div>
+        <button id="notify-perm" class="btn" style="margin-left:12px">Enable Reminders</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <form id="task-form">
+            <div style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+              <div>
+                <label>Task title</label>
+                <input id="title" type="text" placeholder="e.g. Revise calculus chapter 3" required />
+              </div>
+              <div style="width:170px">
+                <label>Priority</label>
+                <select id="priority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div style="flex:1">
+                <label>Subject / Tag</label>
+                <input id="subject" type="text" placeholder="Math, Physics..." />
+              </div>
+              <div style="width:210px">
+                <label>Due (date & time)</label>
+                <input id="due" type="datetime-local" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div style="flex:1">
+                <label>Notes</label>
+                <textarea id="notes" placeholder="Optional notes..."></textarea>
+              </div>
+              <div style="width:120px">
+                <label>Duration (mins)</label>
+                <input id="duration" type="text" inputmode="numeric" placeholder="60" />
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:8px">
+              <div class="muted">You can export / import tasks from the right panel</div>
+              <div>
+                <button type="submit" class="btn">Add Task</button>
+                <button type="button" id="clear-form" class="action-btn">Clear</button>
+              </div>
+            </div>
+          </form>
+
+          <div style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="small">Tasks</div>
+              <div class="search">
+                <input id="search" type="text" placeholder="Search title or subject" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+                <select id="filter">
+                  <option value="all">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="done">Done</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="task-list" class="task-list"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="small">Quick timeline</div>
+              <div class="muted">7-day overview</div>
+            </div>
+            <div class="small" id="today-count"></div>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+
+      </main>
+
+      <aside class="right">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="small">Today Progress</div>
+              <div class="sub" id="today-progress-text">0 / 0 tasks</div>
+            </div>
+            <div style="width:140px">
+              <div class="progress" aria-hidden="true"><i id="today-progress-bar"></i></div>
+            </div>
+          </div>
+
+          <hr style="margin:12px 0;border:0;border-top:1px solid rgba(255,255,255,0.03)" />
+
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <div>
+              <div class="small">Export / Import</div>
+              <div class="muted">Backup or restore tasks as JSON</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <button id="export-json" class="btn">Export</button>
+              <input id="import-file" type="file" accept="application/json" style="display:none" />
+              <button id="import-json" class="action-btn">Import</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="small">Settings</div>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+            <label class="small"><input id="auto-notify" type="checkbox" /> Auto reminders for due tasks (1 min before)</label>
+            <label class="small"><input id="compact-list" type="checkbox" /> Compact task list</label>
+            <button id="clear-all" class="action-btn">Clear All Tasks</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="small">About</div>
+          <p class="muted" style="margin-top:8px">A minimal frontend-only student study planner built with HTML/CSS/JS. Stores tasks in Local Storage. Use for portfolio or extend to a full-stack app.</p>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer class="card" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="small">Smart Study Planner · Frontend demo</div>
+        <div class="small">Author: Ganesh</div>
+      </div>
+    </footer>
+  </div>
+  </script>
+</body>
+</html>
